@@ -4,7 +4,8 @@ from .serializers import (
   UserRegisterSerializer, 
   LoginSerializer, 
   PasswordResetRequestSerializer,
-  SetNewPasswordSerializer
+  SetNewPasswordSerializer,
+  LogoutUserSerializer
 )
 from rest_framework.response import Response
 from rest_framework import status
@@ -77,6 +78,7 @@ class PasswordResetRequentView(GenericAPIView):
       status=status.HTTP_200_OK
     )
     
+    
 class PasswordResetConfirmView(GenericAPIView):
   def get(self, request, uidb64, token):
     try:
@@ -106,3 +108,17 @@ class SetNewPasswordView(GenericAPIView):
       {'message': 'Password reset success'},
       status=status.HTTP_200_OK
    )
+    
+class LogoutUserView(GenericAPIView):
+  serializer_class = LogoutUserSerializer
+  permission_classes = [IsAuthenticated]
+  
+  def post(self, request):
+    serializer = self.serializer_class(data = request.data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    print(request.data)
+    return Response(
+      {'message': 'Logout success'},
+      status=status.HTTP_204_NO_CONTENT
+    )
