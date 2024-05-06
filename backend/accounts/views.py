@@ -65,7 +65,10 @@ class LoginUser(GenericAPIView):
 class TestAuthenticationView(GenericAPIView):
   permission_classes = [IsAuthenticated]
   def get(self, request):
-    return Response({'message': 'You are authenticated'}, status=status.HTTP_200_OK)
+    data = {
+      'message': 'its works',
+    }
+    return Response(data, status=status.HTTP_200_OK)
   
 class PasswordResetRequentView(GenericAPIView):
   serializer_class = PasswordResetRequestSerializer
@@ -119,6 +122,5 @@ class LogoutUserView(GenericAPIView):
     serializer.save()
     print(request.data)
     return Response(
-      {'message': 'Logout success'},
-      status=status.HTTP_204_NO_CONTENT
+      status=status.HTTP_200_OK
     )

@@ -31,7 +31,7 @@ const Signup = () => {
       console.log("response: ",response.data)
       if(response.status === 201){
         navigate("/otp/verify")
-        toast.success(response.message)
+        // toast.success(response.data.message)
       }
     }
   }
