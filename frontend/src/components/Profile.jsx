@@ -9,7 +9,7 @@ const Profile = () => {
 
   const getSomeData = async () => {
     const res = await AxiosInstance.get('/auth/profile/')
-    console.log(res)
+    console.log("res", res.data)
   }
 
   useEffect(() => {
@@ -17,7 +17,6 @@ const Profile = () => {
       navigate('/login')
     }
     else{
-      console.log("=======Get Some Data=======")
       getSomeData()
     }
   }, [jwt_access, user])
