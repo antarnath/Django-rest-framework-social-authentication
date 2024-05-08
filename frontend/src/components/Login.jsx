@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
@@ -69,6 +69,7 @@ const Login = () => {
             />
             </div>
             <input type="submit" value="Login" className='submitButton' />
+            <p className='pass-link'><Link to ={'/forget-password'}>forgot password</Link></p>
           </form>
         </div>
       </div>

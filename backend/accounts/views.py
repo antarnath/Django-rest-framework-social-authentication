@@ -83,6 +83,7 @@ class PasswordResetRequentView(GenericAPIView):
     
     
 class PasswordResetConfirmView(GenericAPIView):
+
   def get(self, request, uidb64, token):
     try:
       user_id = smart_str(urlsafe_base64_decode(uidb64))

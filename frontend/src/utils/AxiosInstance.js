@@ -38,6 +38,7 @@ AxiosInstance.interceptors.request.use(async req => {
       }
     }
   }
+  return req
 })
 
 console.log("AxiosInstance: \n")

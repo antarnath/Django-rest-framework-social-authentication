@@ -94,6 +94,10 @@ class PasswordResetRequestSerializer(serializers.ModelSerializer):
         'password-reset-confirm',
         kwargs={'uidb64': uidb64, 'token': token}
       )
+      print('================================================================')
+      print("site_domain", site_domain)
+      print("relative_link", relative_link)
+      frontend_domain = 'http://localhost:5173'
       abslink = f'http://{site_domain}{relative_link}'
       email_body = f'Hi use the link below to reset your password \n {abslink}'
       data = {
@@ -106,7 +110,7 @@ class PasswordResetRequestSerializer(serializers.ModelSerializer):
   
 class SetNewPasswordSerializer(serializers.ModelSerializer):
   password = serializers.CharField(max_length=65, write_only=True)
-  confirm_password = serializers.CharField(max_length=65, write_only=True)
+  confirm_password = serializers.CharField(max_length=65, write_only=True) 
   uidb64 = serializers.CharField(write_only=True)
   token = serializers.CharField(write_only=True)
   
@@ -120,7 +124,8 @@ class SetNewPasswordSerializer(serializers.ModelSerializer):
       uidb64 = attrs.get('uidb64')
       password = attrs.get('password')
       confirm_password = attrs.get('confirm_password')
-      
+      print("========Set New Password Serializer========")
+      print("token", token)
       user_id = force_str(urlsafe_base64_decode(uidb64))
       user = User.objects.get(id=user_id)
       if not PasswordResetTokenGenerator().check_token(user, token):
